@@ -1,0 +1,15 @@
+Functions
+
+Objective
+Backtrace
+Imply
+Backtrack
+xpathcheck
+
+
+Backtrace - 
+
+xpathcheck - returns true if test possible because xpath exists from D frontier to primary outputs
+	input - D frontier (a set of gates)
+	output - true or false
+	
