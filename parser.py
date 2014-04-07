@@ -11,6 +11,7 @@ class node:
     def __init__(self):
         self.id = 0
         self.gatetype = 1
+        self.level = 0
         self.fanins = 0
         self.cc0_input_order = []
         self.cc1_input_order = []
@@ -24,7 +25,40 @@ class node:
 
 #### Functions ####
 def parseLineToNode(l, n):
-    print l[1]
+    params = l.split(" ")
+    n.id = int(params[0])
+    n.gatetype = int(params[1])
+    n.level = int(params[2])
+    n.fanins = int(params[3])
+
+    #cc0, cc1 end index
+    cc0_end_index = n.fanins + 4;
+    cc1_end_index = 2 * n.fanins + 4;
+    n_fanouts_index = cc1_end_index;
+
+    #Adding cc0, cc1 lists
+    for i in range(4, cc0_end_index):
+        n.cc0_input_order.append(int(params[i]))
+
+    for i in range(cc0_end_index, cc1_end_index):
+        n.cc1_input_order.append(int(params[i]))
+
+    #fanouts value
+    n.fanouts = int(params[n_fanouts_index])
+
+    #co_output index
+    co_end_index = n_fanouts_index + 1 + n.fanouts
+
+    #Adding co_output list
+    for i in range(n_fanouts_index + 1, co_end_index):
+        n.co_output_order.append(int(params[i]))
+
+    #Setting remaining params - co, po, cc0, cc1
+    n.co = int(params[co_end_index])
+    n.po = params[co_end_index + 1]
+    n.cc0 = int(params[co_end_index + 2])
+    n.cc1 = int(params[co_end_index + 3])
+    
     return n
 
 
@@ -46,4 +80,5 @@ else:
 
     for i in range(nodecount):
         nodes[i] = parseLineToNode(lines[i+2], nodes[i])
+        print nodes[i]
 
