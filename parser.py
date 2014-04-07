@@ -24,8 +24,9 @@ class node:
       
 
 #### Functions ####
-def parseLineToNode(l, n):
+def parseLineToNode(l):
     params = l.split(" ")
+    n = node()
     n.id = int(params[0])
     n.gatetype = int(params[1])
     n.level = int(params[2])
@@ -79,6 +80,6 @@ else:
     nodes = [ node() for i in range(nodecount)]
 
     for i in range(nodecount):
-        nodes[i] = parseLineToNode(lines[i+2], nodes[i])
-        print nodes[i]
+        nodes[i] = parseLineToNode(lines[i+2])
+        print nodes[i].cc1
 
