@@ -1,3 +1,13 @@
+Data Structures
+
+Struct Node 
+
+The data structure ‘Node’ is used to store the circuit information in levelized format along with the testability measures 
+
+Struct Signal 
+
+This data structure is used to store the signal value of each node along with the flags needed by the algorithm 
+
 Functions
 
 Objective
@@ -7,9 +17,41 @@ Backtrack
 xpathcheck
 
 
-Backtrace - 
+struct signal backtrace(struct signal); 
 
-xpathcheck - returns true if test possible because xpath exists from D frontier to primary outputs
-	input - D frontier (a set of gates)
-	output - true or false
-	
+The objective (node, value) is given as input to backtrace function. A corresponding (PI, PI value) is returned by the function
+
+struct signal objective(struct signal); 
+
+Depending on the fault location and fault propagation path the objective (node, value) is returned by this function
+
+char pathgen(int , char); 
+
+This recursive function generates all the fault propagation paths from the fault to the primary outputs
+
+backtrack()
+
+Decides alternate primary input assignment in case the current primary input assignment will not lead to a test
+
+void imply(struct signal); 
+
+This function evaluates the logic values of all the nodes based on the values assigned to the PIs and checks for sensitization of the fault
+
+char xpathcheck(struct signal); 
+
+X-Path check is performed using this function. It returns a true or false value depending on the availability of X-Paths from D-frontier to primary outputs
+
+char podem(struct signal); 
+
+This is the main function that implements the PODEM algorithm
+
+Functions definitions in textbook
+
+bool xpathcheck (D-frontier)
+(node, value ) = Objective (fault, vfault);
+Imply(pi, pi_value);
+(pi, pi_value)= Backtrack();
+
+
+
+
